@@ -7,12 +7,12 @@ import { EarthquakeEvents } from '../../features/earthquakes/ui/EarthquakeEvents
 import styles from './EarthquakesPage.module.scss';
 
 export const EarthquakesPage = () => {
-  const { feed, busy, errorMessage, refresh } = useEarthquakes();
+  const { feed, isLoading, errorMessage, refresh } = useEarthquakes();
 
   return (
     <main className={styles.page}>
       <AppHeader />
-      <EarthquakeToolbar busy={busy} onRefresh={() => void refresh()} />
+      <EarthquakeToolbar isLoading={isLoading} onRefresh={() => void refresh()} />
       {errorMessage && (
         <div className={styles.error} role="alert">
           {errorMessage}
@@ -20,7 +20,7 @@ export const EarthquakesPage = () => {
         </div>
       )}
       <EarthquakeSummary earthquakes={feed?.earthquakes ?? null} />
-      <EarthquakeEvents feed={feed} busy={busy} />
+      <EarthquakeEvents feed={feed} isLoading={isLoading} />
       <AppFooter />
     </main>
   );

@@ -1,11 +1,11 @@
 import styles from './EarthquakeToolbar.module.scss';
 
 interface Props {
-  busy: boolean;
+  isLoading: boolean;
   onRefresh: () => void;
 }
 
-export const EarthquakeToolbar = ({ busy, onRefresh }: Props) => {
+export const EarthquakeToolbar = ({ isLoading, onRefresh }: Props) => {
   return (
     <section className={styles['heading']}>
       <div>
@@ -13,8 +13,8 @@ export const EarthquakeToolbar = ({ busy, onRefresh }: Props) => {
         <h1>Землетрясения</h1>
         <p className="muted">Весь мир · Последние 24 часа</p>
       </div>
-      <button disabled={busy} onClick={onRefresh}>
-        {busy ? 'Загрузка…' : 'Обновить данные'}
+      <button disabled={isLoading} onClick={onRefresh}>
+        {isLoading ? 'Загрузка…' : 'Обновить данные'}
       </button>
     </section>
   );

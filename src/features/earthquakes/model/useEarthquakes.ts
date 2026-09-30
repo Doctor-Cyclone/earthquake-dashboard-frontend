@@ -6,7 +6,7 @@ const REQUEST_TIMEOUT_MS = 15_000;
 
 export const useEarthquakes = () => {
   const [feed, setFeed] = useState<Feed | null>(null);
-  const [busy, setBusy] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   const active = useRef<AbortController | null>(null);
 
@@ -39,13 +39,13 @@ export const useEarthquakes = () => {
 
         if (active.current === controller) {
           active.current = null;
-          setBusy(false);
+          setIsLoading(false);
         }
       });
   }, []);
 
   const refresh = () => {
-    setBusy(true);
+    setIsLoading(true);
     setErrorMessage('');
 
     return fetchFeed();
@@ -62,5 +62,5 @@ export const useEarthquakes = () => {
     };
   }, [fetchFeed]);
 
-  return { feed, busy, errorMessage, refresh };
+  return { feed, isLoading, errorMessage, refresh };
 };

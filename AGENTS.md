@@ -8,3 +8,4 @@
 
 - Prefer named arrow functions for components, hooks, helpers and callbacks. Use function declarations only when their semantics (such as hoisting or dynamic this) are needed.
 - Name caught exceptions error. Name error text state errorMessage and its setter setErrorMessage to avoid shadowing.
+- Name request loading flags isLoading and their setters setIsLoading, including component props. Preserve the standard aria-busy attribute.

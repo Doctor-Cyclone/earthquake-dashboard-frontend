@@ -5,14 +5,14 @@ import styles from './EarthquakeEvents.module.scss';
 
 interface Props {
   feed: Feed | null;
-  busy: boolean;
+  isLoading: boolean;
 }
 
-const EventList = ({ feed, busy }: Props) => {
+const EventList = ({ feed, isLoading }: Props) => {
   if (!feed)
     return (
       <p className={styles.empty}>
-        {busy
+        {isLoading
           ? 'Загружаем землетрясения за сутки…'
           : 'Список появится после успешного обновления.'}
       </p>
@@ -42,15 +42,15 @@ const EventList = ({ feed, busy }: Props) => {
   );
 };
 
-export const EarthquakeEvents = ({ feed, busy }: Props) => {
-  const status = busy
+export const EarthquakeEvents = ({ feed, isLoading }: Props) => {
+  const status = isLoading
     ? 'Получаем данные…'
     : feed
       ? 'Загружено ' + formatDateTime(feed.fetchedAt)
       : 'Данные не загружены';
 
   return (
-    <section className={styles.events} aria-busy={busy}>
+    <section className={styles.events} aria-busy={isLoading}>
       <div className={styles['section-title']}>
         <div>
           <h2>Последние события</h2>
@@ -60,7 +60,7 @@ export const EarthquakeEvents = ({ feed, busy }: Props) => {
           {status}
         </span>
       </div>
-      <EventList feed={feed} busy={busy} />
+      <EventList feed={feed} isLoading={isLoading} />
     </section>
   );
 };
