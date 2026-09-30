@@ -36,3 +36,19 @@
 - Автообновление и график активности.
 
 [Репозиторий бэкенда](https://github.com/Doctor-Cyclone/earthquake-dashboard-backend).
+
+
+## Архитектура фронтенда
+
+- `src/App.tsx` — корневой компонент, подключает страницу.
+- `src/app/styles` — базовые глобальные стили.
+- `src/pages/EarthquakesPage` — композиция экрана.
+- `src/components` — общие шапка и подвал.
+- `src/features/earthquakes/api` — HTTP-запросы.
+- `src/features/earthquakes/model` — типы, хук загрузки и расчёт сводки.
+- `src/features/earthquakes/ui` — панель обновления, сводка, таблица и строка события.
+- `src/shared/lib` — общие функции форматирования.
+
+Стили компонентов находятся рядом с ними в `*.module.scss` и изолированы через CSS Modules. Глобальные стили ограничены базовой типографикой и сбросом. Компоненты UI получают данные через props; загрузка, отмена запросов и ошибки управляются хуком `useEarthquakes`.
+
+`npm run format` форматирует исходники; `npm run format:check` проверяет форматирование.

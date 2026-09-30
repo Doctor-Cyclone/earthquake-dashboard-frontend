@@ -1,0 +1,19 @@
+.page {
+  max-width: 1320px;
+  margin: auto;
+  padding: 0 40px;
+}
+.error {
+  border: 1px solid #9b6150;
+  background: #30221f;
+  color: #ffd5bd;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+@media (max-width: 700px) {
+  .page {
+    padding: 0 18px;
+  }
+}

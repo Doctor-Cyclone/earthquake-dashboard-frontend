@@ -1,0 +1,45 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 26px 0;
+  border-bottom: 1px solid #263041;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 750;
+  letter-spacing: 2px;
+  text-decoration: none;
+  color: #eef5ff;
+}
+.brand img {
+  width: 35px;
+  height: 35px;
+}
+.brand span {
+  font-size: 14px;
+  font-weight: 400;
+  color: #96a6bb;
+  letter-spacing: 0;
+  margin-left: 15px;
+}
+.source {
+  font-size: 14px;
+  color: #9dacbf;
+  border: 1px solid #2b3749;
+  padding: 6px 12px;
+  border-radius: 30px;
+}
+@media (max-width: 700px) {
+  .brand span {
+    display: none;
+  }
+}
+@media (max-width: 700px) {
+  .source {
+    font-size: 12px;
+  }
+}
