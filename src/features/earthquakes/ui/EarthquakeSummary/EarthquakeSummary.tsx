@@ -1,15 +1,16 @@
-import type { Earthquake } from '../../model/types'
-import { getEarthquakeSummary } from '../../model/getEarthquakeSummary'
-import styles from './EarthquakeSummary.module.scss'
+import type { Earthquake } from '../../model/types';
+import { getEarthquakeSummary } from '../../model/getEarthquakeSummary';
+import styles from './EarthquakeSummary.module.scss';
 
 interface Props {
-  earthquakes: Earthquake[] | null
+  earthquakes: Earthquake[] | null;
 }
+
 interface StatCardProps {
-  label: string
-  value: string | number
-  note: string
-  unit?: string
+  label: string;
+  value: string | number;
+  note: string;
+  unit?: string;
 }
 
 function StatCard({ label, value, note, unit }: StatCardProps) {
@@ -22,11 +23,12 @@ function StatCard({ label, value, note, unit }: StatCardProps) {
       </strong>
       <small>{note}</small>
     </article>
-  )
+  );
 }
 
 export function EarthquakeSummary({ earthquakes }: Props) {
-  const summary = earthquakes ? getEarthquakeSummary(earthquakes) : null
+  const summary = earthquakes ? getEarthquakeSummary(earthquakes) : null;
+
   return (
     <section className={styles.stats} aria-label="Сводка за сутки">
       <StatCard
@@ -46,5 +48,5 @@ export function EarthquakeSummary({ earthquakes }: Props) {
         note="Событий за последние сутки"
       />
     </section>
-  )
+  );
 }

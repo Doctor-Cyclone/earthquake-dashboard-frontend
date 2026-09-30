@@ -1,5 +1,5 @@
-import { EarthquakesPage } from './pages/EarthquakesPage/EarthquakesPage'
+import { EarthquakesPage } from './pages/EarthquakesPage/EarthquakesPage';
 
 export default function App() {
-  return <EarthquakesPage />
+  return <EarthquakesPage />;
 }

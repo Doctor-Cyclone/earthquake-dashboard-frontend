@@ -1,4 +1,5 @@
-import styles from './AppHeader.module.scss'
+import styles from './AppHeader.module.scss';
+
 export function AppHeader() {
   return (
     <header className={styles.header}>
@@ -8,5 +9,5 @@ export function AppHeader() {
       </a>
       <span className={styles['source']}>Данные USGS</span>
     </header>
-  )
+  );
 }

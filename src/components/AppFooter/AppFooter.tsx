@@ -1,4 +1,5 @@
-import styles from './AppFooter.module.scss'
+import styles from './AppFooter.module.scss';
+
 export function AppFooter() {
   return (
     <footer className={styles.footer}>
@@ -14,5 +15,5 @@ export function AppFooter() {
       </span>
       <span>Время в часовом поясе устройства · Обновление вручную</span>
     </footer>
-  )
+  );
 }

@@ -1,11 +1,11 @@
-import type { Feed } from '../../model/types'
-import { formatDateTime } from '../../../../shared/lib/formatDateTime'
-import { EarthquakeRow } from './EarthquakeRow'
-import styles from './EarthquakeEvents.module.scss'
+import type { Feed } from '../../model/types';
+import { formatDateTime } from '../../../../shared/lib/formatDateTime';
+import { EarthquakeRow } from './EarthquakeRow';
+import styles from './EarthquakeEvents.module.scss';
 
 interface Props {
-  feed: Feed | null
-  busy: boolean
+  feed: Feed | null;
+  busy: boolean;
 }
 
 function EventList({ feed, busy }: Props) {
@@ -16,9 +16,11 @@ function EventList({ feed, busy }: Props) {
           ? 'Загружаем землетрясения за сутки…'
           : 'Список появится после успешного обновления.'}
       </p>
-    )
+    );
+
   if (!feed.earthquakes.length)
-    return <p className={styles.empty}>В полученной ленте нет землетрясений.</p>
+    return <p className={styles.empty}>В полученной ленте нет землетрясений.</p>;
+
   return (
     <div className={styles['table-wrap']}>
       <table>
@@ -37,7 +39,7 @@ function EventList({ feed, busy }: Props) {
         </tbody>
       </table>
     </div>
-  )
+  );
 }
 
 export function EarthquakeEvents({ feed, busy }: Props) {
@@ -45,7 +47,8 @@ export function EarthquakeEvents({ feed, busy }: Props) {
     ? 'Получаем данные…'
     : feed
       ? 'Загружено ' + formatDateTime(feed.fetchedAt)
-      : 'Данные не загружены'
+      : 'Данные не загружены';
+
   return (
     <section className={styles.events} aria-busy={busy}>
       <div className={styles['section-title']}>
@@ -59,5 +62,5 @@ export function EarthquakeEvents({ feed, busy }: Props) {
       </div>
       <EventList feed={feed} busy={busy} />
     </section>
-  )
+  );
 }

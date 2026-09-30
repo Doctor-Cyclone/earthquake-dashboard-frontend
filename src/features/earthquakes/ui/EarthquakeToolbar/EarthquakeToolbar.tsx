@@ -1,8 +1,10 @@
-import styles from './EarthquakeToolbar.module.scss'
+import styles from './EarthquakeToolbar.module.scss';
+
 interface Props {
-  busy: boolean
-  onRefresh: () => void
+  busy: boolean;
+  onRefresh: () => void;
 }
+
 export function EarthquakeToolbar({ busy, onRefresh }: Props) {
   return (
     <section className={styles['heading']}>
@@ -15,5 +17,5 @@ export function EarthquakeToolbar({ busy, onRefresh }: Props) {
         {busy ? 'Загрузка…' : 'Обновить данные'}
       </button>
     </section>
-  )
+  );
 }

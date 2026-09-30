@@ -3,8 +3,8 @@ const formatter = new Intl.DateTimeFormat('ru-RU', {
   month: 'short',
   hour: '2-digit',
   minute: '2-digit',
-})
+});
 
 export function formatDateTime(value: string): string {
-  return formatter.format(new Date(value))
+  return formatter.format(new Date(value));
 }

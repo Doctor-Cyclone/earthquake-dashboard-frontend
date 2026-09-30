@@ -1,6 +1,6 @@
-import type { Earthquake } from '../../model/types'
-import { formatDateTime } from '../../../../shared/lib/formatDateTime'
-import styles from './EarthquakeEvents.module.scss'
+import type { Earthquake } from '../../model/types';
+import { formatDateTime } from '../../../../shared/lib/formatDateTime';
+import styles from './EarthquakeEvents.module.scss';
 
 export function EarthquakeRow({ event }: { event: Earthquake }) {
   const magnitudeClass = [
@@ -8,7 +8,8 @@ export function EarthquakeRow({ event }: { event: Earthquake }) {
     (event.magnitude ?? 0) >= 4.5 ? styles.high : '',
   ]
     .filter(Boolean)
-    .join(' ')
+    .join(' ');
+
   return (
     <tr>
       <td>
@@ -25,5 +26,5 @@ export function EarthquakeRow({ event }: { event: Earthquake }) {
         <time dateTime={event.time}>{formatDateTime(event.time)}</time>
       </td>
     </tr>
-  )
+  );
 }
