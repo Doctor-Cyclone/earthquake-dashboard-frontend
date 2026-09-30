@@ -1,6 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { loadEarthquakes } from '../api/loadEarthquakes';
 import type { Feed } from './types';
+
+const REQUEST_TIMEOUT_MS = 15_000;
 
 export const useEarthquakes = () => {
   const [feed, setFeed] = useState<Feed | null>(null);
@@ -8,48 +10,57 @@ export const useEarthquakes = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const active = useRef<AbortController | null>(null);
 
-  const refresh = async () => {
+  const fetchFeed = useCallback(() => {
     active.current?.abort();
 
     const controller = new AbortController();
 
     active.current = controller;
 
-    const timer = setTimeout(() => controller.abort(), 15000);
+    const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
+    return loadEarthquakes(controller.signal)
+      .then((result) => {
+        if (active.current === controller) {
+          setFeed(result);
+        }
+      })
+      .catch((error: unknown) => {
+        if (active.current === controller) {
+          setErrorMessage(
+            error instanceof Error && error.name !== 'AbortError'
+              ? error.message
+              : 'Ответ задерживается. Попробуйте обновить данные ещё раз.',
+          );
+        }
+      })
+      .finally(() => {
+        clearTimeout(timeout);
+
+        if (active.current === controller) {
+          active.current = null;
+          setBusy(false);
+        }
+      });
+  }, []);
+
+  const refresh = () => {
     setBusy(true);
     setErrorMessage('');
 
-    try {
-      const result = await loadEarthquakes(controller.signal);
-
-      if (active.current === controller) setFeed(result);
-    } catch (error) {
-      if (active.current === controller)
-        setErrorMessage(
-          error instanceof Error && error.name !== 'AbortError'
-            ? error.message
-            : 'Ответ задерживается. Попробуйте обновить данные ещё раз.',
-        );
-    } finally {
-      clearTimeout(timer);
-
-      if (active.current === controller) setBusy(false);
-    }
+    return fetchFeed();
   };
 
   useEffect(() => {
-    const initialLoad = setTimeout(() => void refresh(), 0);
+    void fetchFeed();
 
     return () => {
-      clearTimeout(initialLoad);
-
-      const previous = active.current;
+      const controller = active.current;
 
       active.current = null;
-      previous?.abort();
+      controller?.abort();
     };
-  }, []);
+  }, [fetchFeed]);
 
   return { feed, busy, errorMessage, refresh };
 };
