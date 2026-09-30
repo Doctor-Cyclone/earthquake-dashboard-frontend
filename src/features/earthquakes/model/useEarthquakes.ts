@@ -5,7 +5,7 @@ import type { Feed } from './types';
 export const useEarthquakes = () => {
   const [feed, setFeed] = useState<Feed | null>(null);
   const [busy, setBusy] = useState(true);
-  const [error, setError] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const active = useRef<AbortController | null>(null);
 
   const refresh = async () => {
@@ -18,17 +18,17 @@ export const useEarthquakes = () => {
     const timer = setTimeout(() => controller.abort(), 15000);
 
     setBusy(true);
-    setError('');
+    setErrorMessage('');
 
     try {
       const result = await loadEarthquakes(controller.signal);
 
       if (active.current === controller) setFeed(result);
-    } catch (problem) {
+    } catch (error) {
       if (active.current === controller)
-        setError(
-          problem instanceof Error && problem.name !== 'AbortError'
-            ? problem.message
+        setErrorMessage(
+          error instanceof Error && error.name !== 'AbortError'
+            ? error.message
             : 'Ответ задерживается. Попробуйте обновить данные ещё раз.',
         );
     } finally {
@@ -51,5 +51,5 @@ export const useEarthquakes = () => {
     };
   }, []);
 
-  return { feed, busy, error, refresh };
+  return { feed, busy, errorMessage, refresh };
 };

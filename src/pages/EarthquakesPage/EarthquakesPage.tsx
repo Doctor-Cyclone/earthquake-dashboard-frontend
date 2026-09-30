@@ -7,15 +7,15 @@ import { EarthquakeEvents } from '../../features/earthquakes/ui/EarthquakeEvents
 import styles from './EarthquakesPage.module.scss';
 
 export const EarthquakesPage = () => {
-  const { feed, busy, error, refresh } = useEarthquakes();
+  const { feed, busy, errorMessage, refresh } = useEarthquakes();
 
   return (
     <main className={styles.page}>
       <AppHeader />
       <EarthquakeToolbar busy={busy} onRefresh={() => void refresh()} />
-      {error && (
+      {errorMessage && (
         <div className={styles.error} role="alert">
-          {error}
+          {errorMessage}
           {feed && ' Показана последняя успешная загрузка.'}
         </div>
       )}
