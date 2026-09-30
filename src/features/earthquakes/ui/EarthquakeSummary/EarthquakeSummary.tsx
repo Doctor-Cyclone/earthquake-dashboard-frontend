@@ -13,7 +13,7 @@ interface StatCardProps {
   unit?: string;
 }
 
-function StatCard({ label, value, note, unit }: StatCardProps) {
+const StatCard = ({ label, value, note, unit }: StatCardProps) => {
   return (
     <article>
       <p>{label}</p>
@@ -24,9 +24,9 @@ function StatCard({ label, value, note, unit }: StatCardProps) {
       <small>{note}</small>
     </article>
   );
-}
+};
 
-export function EarthquakeSummary({ earthquakes }: Props) {
+export const EarthquakeSummary = ({ earthquakes }: Props) => {
   const summary = earthquakes ? getEarthquakeSummary(earthquakes) : null;
 
   return (
@@ -49,4 +49,4 @@ export function EarthquakeSummary({ earthquakes }: Props) {
       />
     </section>
   );
-}
+};

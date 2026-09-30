@@ -1,5 +1,7 @@
 import { EarthquakesPage } from './pages/EarthquakesPage/EarthquakesPage';
 
-export default function App() {
+const App = () => {
   return <EarthquakesPage />;
-}
+};
+
+export default App;

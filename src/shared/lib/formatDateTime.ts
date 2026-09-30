@@ -5,6 +5,6 @@ const formatter = new Intl.DateTimeFormat('ru-RU', {
   minute: '2-digit',
 });
 
-export function formatDateTime(value: string): string {
+export const formatDateTime = (value: string): string => {
   return formatter.format(new Date(value));
-}
+};

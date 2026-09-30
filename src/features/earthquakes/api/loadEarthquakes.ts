@@ -1,6 +1,6 @@
 import type { Feed } from '../model/types';
 
-export async function loadEarthquakes(signal: AbortSignal): Promise<Feed> {
+export const loadEarthquakes = async (signal: AbortSignal): Promise<Feed> => {
   const response = await fetch('/api/earthquakes', { signal });
 
   if (!response.ok)
@@ -14,4 +14,4 @@ export async function loadEarthquakes(signal: AbortSignal): Promise<Feed> {
     throw new Error('Источник вернул данные в неизвестном формате.');
 
   return data;
-}
+};

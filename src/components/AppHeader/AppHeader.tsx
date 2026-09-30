@@ -1,6 +1,6 @@
 import styles from './AppHeader.module.scss';
 
-export function AppHeader() {
+export const AppHeader = () => {
   return (
     <header className={styles.header}>
       <a className={styles['brand']} href="/" aria-label="Seismic — главная">
@@ -10,4 +10,4 @@ export function AppHeader() {
       <span className={styles['source']}>Данные USGS</span>
     </header>
   );
-}
+};

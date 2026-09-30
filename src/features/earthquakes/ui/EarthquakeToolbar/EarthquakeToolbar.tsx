@@ -5,7 +5,7 @@ interface Props {
   onRefresh: () => void;
 }
 
-export function EarthquakeToolbar({ busy, onRefresh }: Props) {
+export const EarthquakeToolbar = ({ busy, onRefresh }: Props) => {
   return (
     <section className={styles['heading']}>
       <div>
@@ -18,4 +18,4 @@ export function EarthquakeToolbar({ busy, onRefresh }: Props) {
       </button>
     </section>
   );
-}
+};

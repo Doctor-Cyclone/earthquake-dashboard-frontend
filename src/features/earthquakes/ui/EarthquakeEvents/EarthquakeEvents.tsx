@@ -8,7 +8,7 @@ interface Props {
   busy: boolean;
 }
 
-function EventList({ feed, busy }: Props) {
+const EventList = ({ feed, busy }: Props) => {
   if (!feed)
     return (
       <p className={styles.empty}>
@@ -40,9 +40,9 @@ function EventList({ feed, busy }: Props) {
       </table>
     </div>
   );
-}
+};
 
-export function EarthquakeEvents({ feed, busy }: Props) {
+export const EarthquakeEvents = ({ feed, busy }: Props) => {
   const status = busy
     ? 'Получаем данные…'
     : feed
@@ -63,4 +63,4 @@ export function EarthquakeEvents({ feed, busy }: Props) {
       <EventList feed={feed} busy={busy} />
     </section>
   );
-}
+};

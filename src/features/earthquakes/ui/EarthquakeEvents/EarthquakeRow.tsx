@@ -2,7 +2,7 @@ import type { Earthquake } from '../../model/types';
 import { formatDateTime } from '../../../../shared/lib/formatDateTime';
 import styles from './EarthquakeEvents.module.scss';
 
-export function EarthquakeRow({ event }: { event: Earthquake }) {
+export const EarthquakeRow = ({ event }: { event: Earthquake }) => {
   const magnitudeClass = [
     styles.magnitude,
     (event.magnitude ?? 0) >= 4.5 ? styles.high : '',
@@ -27,4 +27,4 @@ export function EarthquakeRow({ event }: { event: Earthquake }) {
       </td>
     </tr>
   );
-}
+};

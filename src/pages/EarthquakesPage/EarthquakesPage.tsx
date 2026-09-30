@@ -6,7 +6,7 @@ import { EarthquakeSummary } from '../../features/earthquakes/ui/EarthquakeSumma
 import { EarthquakeEvents } from '../../features/earthquakes/ui/EarthquakeEvents/EarthquakeEvents';
 import styles from './EarthquakesPage.module.scss';
 
-export function EarthquakesPage() {
+export const EarthquakesPage = () => {
   const { feed, busy, error, refresh } = useEarthquakes();
 
   return (
@@ -24,4 +24,4 @@ export function EarthquakesPage() {
       <AppFooter />
     </main>
   );
-}
+};

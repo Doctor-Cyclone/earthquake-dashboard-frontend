@@ -1,6 +1,6 @@
 import type { Earthquake } from './types';
 
-export function getEarthquakeSummary(earthquakes: Earthquake[]) {
+export const getEarthquakeSummary = (earthquakes: Earthquake[]) => {
   let maximum: number | null = null;
   let significantCount = 0;
 
@@ -13,4 +13,4 @@ export function getEarthquakeSummary(earthquakes: Earthquake[]) {
   }
 
   return { count: earthquakes.length, maximum, significantCount };
-}
+};

@@ -2,13 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import { loadEarthquakes } from '../api/loadEarthquakes';
 import type { Feed } from './types';
 
-export function useEarthquakes() {
+export const useEarthquakes = () => {
   const [feed, setFeed] = useState<Feed | null>(null);
   const [busy, setBusy] = useState(true);
   const [error, setError] = useState('');
   const active = useRef<AbortController | null>(null);
 
-  async function refresh() {
+  const refresh = async () => {
     active.current?.abort();
 
     const controller = new AbortController();
@@ -36,7 +36,7 @@ export function useEarthquakes() {
 
       if (active.current === controller) setBusy(false);
     }
-  }
+  };
 
   useEffect(() => {
     const initialLoad = setTimeout(() => void refresh(), 0);
@@ -52,4 +52,4 @@ export function useEarthquakes() {
   }, []);
 
   return { feed, busy, error, refresh };
-}
+};

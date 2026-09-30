@@ -1,6 +1,6 @@
 import styles from './AppFooter.module.scss';
 
-export function AppFooter() {
+export const AppFooter = () => {
   return (
     <footer className={styles.footer}>
       <span>
@@ -16,4 +16,4 @@ export function AppFooter() {
       <span>Время в часовом поясе устройства · Обновление вручную</span>
     </footer>
   );
-}
+};
