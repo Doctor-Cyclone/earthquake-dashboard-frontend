@@ -48,7 +48,7 @@ export const useEarthquakes = () => {
     setIsLoading(true);
     setErrorMessage('');
 
-    return fetchFeed();
+    void fetchFeed();
   };
 
   useEffect(() => {

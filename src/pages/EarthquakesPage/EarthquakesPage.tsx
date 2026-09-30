@@ -12,7 +12,7 @@ export const EarthquakesPage = () => {
   return (
     <main className={styles.page}>
       <AppHeader />
-      <EarthquakeToolbar isLoading={isLoading} onRefresh={() => void refresh()} />
+      <EarthquakeToolbar isLoading={isLoading} onRefresh={refresh} />
       {errorMessage && (
         <div className={styles.error} role="alert">
           {errorMessage}
