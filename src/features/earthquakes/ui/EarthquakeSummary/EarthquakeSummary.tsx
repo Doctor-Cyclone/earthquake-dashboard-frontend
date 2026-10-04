@@ -32,9 +32,9 @@ export const EarthquakeSummary = ({ earthquakes }: Props) => {
   return (
     <section className={styles.stats} aria-label="Сводка за сутки">
       <StatCard
-        label="Событий за сутки"
+        label="Событий в выборке"
         value={summary?.count ?? '—'}
-        note="В суточной ленте USGS"
+        note="За сутки с учётом фильтров"
       />
       <StatCard
         label="Максимальная магнитуда"
@@ -45,7 +45,7 @@ export const EarthquakeSummary = ({ earthquakes }: Props) => {
       <StatCard
         label="Магнитуда 4,5 и выше"
         value={summary?.significantCount ?? '—'}
-        note="Событий за последние сутки"
+        note="В текущей выборке за сутки"
       />
     </section>
   );

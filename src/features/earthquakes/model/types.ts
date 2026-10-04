@@ -9,9 +9,14 @@ export interface Earthquake {
 }
 
 export interface Feed {
+  stale: boolean;
   source: string;
   generatedAt: string;
   fetchedAt: string;
   count: number;
   earthquakes: Earthquake[];
 }
+
+export type EarthquakeFilters = Partial<
+  Record<'minMagnitude' | 'maxMagnitude' | 'minDepth' | 'maxDepth', number>
+>;

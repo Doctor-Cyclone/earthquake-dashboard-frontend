@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { loadEarthquakes } from '../api/loadEarthquakes';
-import type { Feed } from './types';
+import type { Feed, EarthquakeFilters } from './types';
 
 const REQUEST_TIMEOUT_MS = 15_000;
 
@@ -8,6 +8,7 @@ export const useEarthquakes = () => {
   const [feed, setFeed] = useState<Feed | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
+  const filters = useRef<EarthquakeFilters>({});
   const active = useRef<AbortController | null>(null);
 
   const fetchFeed = useCallback(() => {
@@ -19,7 +20,7 @@ export const useEarthquakes = () => {
 
     const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
-    return loadEarthquakes(controller.signal)
+    return loadEarthquakes(controller.signal, filters.current)
       .then((result) => {
         if (active.current === controller) {
           setFeed(result);
@@ -51,6 +52,12 @@ export const useEarthquakes = () => {
     void fetchFeed();
   };
 
+  const applyFilters = (nextFilters: EarthquakeFilters) => {
+    filters.current = nextFilters;
+    setFeed(null);
+    refresh();
+  };
+
   useEffect(() => {
     void fetchFeed();
 
@@ -62,5 +69,5 @@ export const useEarthquakes = () => {
     };
   }, [fetchFeed]);
 
-  return { feed, isLoading, errorMessage, refresh };
+  return { feed, isLoading, errorMessage, refresh, applyFilters };
 };

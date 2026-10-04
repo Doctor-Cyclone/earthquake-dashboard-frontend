@@ -7,11 +7,17 @@ import styles from './EarthquakeMap.module.scss';
 
 interface Props {
   earthquakes: Earthquake[];
+  isLoading: boolean;
   selectedId: string | null;
   onSelect: (id: string) => void;
 }
 
-export const EarthquakeMap = ({ earthquakes, selectedId, onSelect }: Props) => {
+export const EarthquakeMap = ({
+  earthquakes,
+  selectedId,
+  onSelect,
+  isLoading,
+}: Props) => {
   const container = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
   const markers = useRef(new Map<string, L.CircleMarker>());
@@ -52,7 +58,9 @@ export const EarthquakeMap = ({ earthquakes, selectedId, onSelect }: Props) => {
 
     const layer = L.layerGroup().addTo(instance);
 
-    markers.current.clear();
+    const currentMarkers = markers.current;
+
+    currentMarkers.clear();
 
     earthquakes.forEach((event) => {
       const marker = L.circleMarker([event.latitude, event.longitude], {
@@ -76,7 +84,7 @@ export const EarthquakeMap = ({ earthquakes, selectedId, onSelect }: Props) => {
 
     return () => {
       layer.remove();
-      markers.current.clear();
+      currentMarkers.clear();
     };
   }, [earthquakes, onSelect]);
 
@@ -88,6 +96,7 @@ export const EarthquakeMap = ({ earthquakes, selectedId, onSelect }: Props) => {
 
     if (!marker) {
       instance.closePopup();
+      instance.setView([20, 0], 2);
 
       return;
     }
@@ -112,7 +121,7 @@ export const EarthquakeMap = ({ earthquakes, selectedId, onSelect }: Props) => {
         className={styles.map}
         aria-label="Интерактивная карта. Событие также можно выбрать в списке ниже."
       />
-      {!earthquakes.length && (
+      {!isLoading && !earthquakes.length && (
         <p className={styles.empty}>Нет событий для отображения на карте.</p>
       )}
     </section>

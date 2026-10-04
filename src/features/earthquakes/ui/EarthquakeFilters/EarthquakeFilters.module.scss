@@ -1,0 +1,69 @@
+.form {
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  border: 1px solid #293448;
+  border-radius: 12px;
+  background: #121b29;
+  fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+  }
+  legend {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0;
+    margin-bottom: 14px;
+  }
+  p {
+    font-size: 13px;
+    color: #9cabc0;
+    margin: 12px 0 0;
+  }
+  input {
+    width: 100%;
+    min-width: 0;
+    margin-top: 6px;
+    border: 1px solid #43516a;
+    border-radius: 6px;
+    background: #0b1019;
+    color: #e6ecf5;
+    padding: 10px;
+    font: inherit;
+  }
+  button {
+    border: 0;
+    border-radius: 6px;
+    background: #71dfba;
+    color: #09221d;
+    font: inherit;
+    font-weight: 600;
+    padding: 11px 14px;
+    cursor: pointer;
+  }
+  button:disabled {
+    opacity: 0.5;
+    cursor: wait;
+  }
+  .reset {
+    border: 1px solid #43516a;
+    background: transparent;
+    color: #e6ecf5;
+  }
+  .error {
+    color: #ffc885;
+  }
+}
+.fields {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(90px, 1fr)) auto auto;
+  align-items: end;
+  gap: 14px;
+  font-size: 14px;
+}
+@media (max-width: 900px) {
+  .fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

@@ -1,3 +1,5 @@
+import { EarthquakeFiltersForm } from '../../features/earthquakes/ui/EarthquakeFilters/EarthquakeFilters';
+import { formatDateTime } from '../../shared/lib/formatDateTime';
 import { useState } from 'react';
 import { EarthquakeMap } from '../../features/earthquakes/ui/EarthquakeMap/EarthquakeMap';
 import type { Earthquake } from '../../features/earthquakes/model/types';
@@ -12,7 +14,7 @@ import styles from './EarthquakesPage.module.scss';
 const EMPTY_EVENTS: Earthquake[] = [];
 
 export const EarthquakesPage = () => {
-  const { feed, isLoading, errorMessage, refresh } = useEarthquakes();
+  const { feed, isLoading, errorMessage, refresh, applyFilters } = useEarthquakes();
 
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const earthquakes = feed?.earthquakes ?? EMPTY_EVENTS;
@@ -30,8 +32,16 @@ export const EarthquakesPage = () => {
           {feed && ' Показана последняя успешная загрузка.'}
         </div>
       )}
+      <EarthquakeFiltersForm isLoading={isLoading} onApply={applyFilters} />
+      {feed?.stale && (
+        <div className={styles.error} role="status">
+          USGS временно недоступен. Показаны устаревшие данные, загруженные{' '}
+          {formatDateTime(feed.fetchedAt)}.
+        </div>
+      )}
       <EarthquakeSummary earthquakes={feed?.earthquakes ?? null} />
       <EarthquakeMap
+        isLoading={isLoading}
         earthquakes={earthquakes}
         selectedId={visibleSelectedId}
         onSelect={setSelectedId}
