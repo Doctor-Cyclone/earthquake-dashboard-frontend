@@ -2,7 +2,13 @@ import type { Earthquake } from '../../model/types';
 import { formatDateTime } from '../../../../shared/lib/formatDateTime';
 import styles from './EarthquakeEvents.module.scss';
 
-export const EarthquakeRow = ({ event }: { event: Earthquake }) => {
+interface Props {
+  event: Earthquake;
+  isSelected: boolean;
+  onSelect: (id: string) => void;
+}
+
+export const EarthquakeRow = ({ event, isSelected, onSelect }: Props) => {
   const magnitudeClass = [
     styles.magnitude,
     (event.magnitude ?? 0) >= 4.5 ? styles.high : '',
@@ -11,12 +17,18 @@ export const EarthquakeRow = ({ event }: { event: Earthquake }) => {
     .join(' ');
 
   return (
-    <tr>
+    <tr className={isSelected ? styles.selected : undefined}>
       <td>
         <span className={magnitudeClass}>{event.magnitude?.toFixed(1) ?? '—'}</span>
       </td>
       <td>
-        <span className={styles.place}>{event.place ?? 'Место не указано'}</span>
+        <button
+          className={styles.eventButton}
+          aria-pressed={isSelected}
+          onClick={() => onSelect(event.id)}
+        >
+          {event.place ?? 'Место не указано'}
+        </button>
         <small>
           {event.latitude.toFixed(2)}°, {event.longitude.toFixed(2)}°
         </small>

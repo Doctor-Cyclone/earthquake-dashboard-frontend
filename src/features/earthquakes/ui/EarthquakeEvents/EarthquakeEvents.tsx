@@ -6,9 +6,11 @@ import styles from './EarthquakeEvents.module.scss';
 interface Props {
   feed: Feed | null;
   isLoading: boolean;
+  selectedId: string | null;
+  onSelect: (id: string) => void;
 }
 
-const EventList = ({ feed, isLoading }: Props) => {
+const EventList = ({ feed, isLoading, selectedId, onSelect }: Props) => {
   if (!feed)
     return (
       <p className={styles.empty}>
@@ -34,7 +36,12 @@ const EventList = ({ feed, isLoading }: Props) => {
         </thead>
         <tbody>
           {feed.earthquakes.map((event) => (
-            <EarthquakeRow key={event.id} event={event} />
+            <EarthquakeRow
+              key={event.id}
+              event={event}
+              isSelected={selectedId === event.id}
+              onSelect={onSelect}
+            />
           ))}
         </tbody>
       </table>
@@ -42,7 +49,7 @@ const EventList = ({ feed, isLoading }: Props) => {
   );
 };
 
-export const EarthquakeEvents = ({ feed, isLoading }: Props) => {
+export const EarthquakeEvents = ({ feed, isLoading, selectedId, onSelect }: Props) => {
   const status = isLoading
     ? 'Получаем данные…'
     : feed
@@ -60,7 +67,12 @@ export const EarthquakeEvents = ({ feed, isLoading }: Props) => {
           {status}
         </span>
       </div>
-      <EventList feed={feed} isLoading={isLoading} />
+      <EventList
+        feed={feed}
+        isLoading={isLoading}
+        selectedId={selectedId}
+        onSelect={onSelect}
+      />
     </section>
   );
 };

@@ -1,0 +1,50 @@
+.panel {
+  margin-bottom: 24px;
+  border: 1px solid #293448;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #101824;
+}
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px;
+  h2 {
+    margin: 0;
+    font-size: 19px;
+  }
+  span {
+    color: #9cabc0;
+    font-size: 14px;
+  }
+}
+.map {
+  height: 430px;
+  background: #263343;
+  color: #162131;
+  isolation: isolate;
+  :global(.leaflet-popup-content) {
+    font-family: inherit;
+    font-size: 14px;
+  }
+  :global(.leaflet-control-attribution) {
+    font-size: 12px;
+  }
+}
+.panel > p {
+  margin: 0;
+  padding: 12px 24px;
+  font-size: 14px;
+  color: #ffc885;
+}
+@media (max-width: 700px) {
+  .heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .map {
+    height: 340px;
+  }
+}
