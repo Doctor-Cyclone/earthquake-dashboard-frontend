@@ -1,3 +1,4 @@
+import { EarthquakeActivity } from '../../features/earthquakes/ui/EarthquakeActivity/EarthquakeActivity';
 import { EarthquakeFiltersForm } from '../../features/earthquakes/ui/EarthquakeFilters/EarthquakeFilters';
 import { formatDateTime } from '../../shared/lib/formatDateTime';
 import { useState } from 'react';
@@ -46,6 +47,7 @@ export const EarthquakesPage = () => {
         selectedId={visibleSelectedId}
         onSelect={setSelectedId}
       />
+      <EarthquakeActivity feed={feed} isLoading={isLoading} />
       <EarthquakeEvents
         feed={feed}
         isLoading={isLoading}

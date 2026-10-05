@@ -83,8 +83,8 @@ export const EarthquakeFiltersForm = ({ isLoading, onApply }: Props) => {
         </div>
       </fieldset>
       <p>
-        Карта, сводка и список показывают одну выборку. Изменения действуют после нажатия
-        «Применить».
+        Карта, график, сводка и список показывают одну выборку. Изменения действуют после
+        нажатия «Применить».
       </p>
       {errorMessage && (
         <p role="alert" className={styles.error}>
