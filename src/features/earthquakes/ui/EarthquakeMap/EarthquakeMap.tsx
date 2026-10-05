@@ -21,6 +21,7 @@ export const EarthquakeMap = ({
   const container = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
   const markers = useRef(new Map<string, L.CircleMarker>());
+  const previousSelectedId = useRef<string | null>(null);
   const [tileError, setTileError] = useState(false);
 
   useEffect(() => {
@@ -77,7 +78,7 @@ export const EarthquakeMap = ({
       title.textContent = event.place ?? 'Место не указано';
       details.textContent = `M ${event.magnitude?.toFixed(1) ?? '—'} · ${event.depthKm.toFixed(1)} км · ${formatDateTime(event.time)}`;
       content.append(title, details);
-      marker.bindPopup(content);
+      marker.bindPopup(content, { autoPan: false });
       marker.on('click', () => onSelect(event.id));
       markers.current.set(event.id, marker);
     });
@@ -96,12 +97,16 @@ export const EarthquakeMap = ({
 
     if (!marker) {
       instance.closePopup();
-      instance.setView([20, 0], 2);
+      previousSelectedId.current = null;
 
       return;
     }
 
-    instance.setView(marker.getLatLng(), Math.max(instance.getZoom(), 5));
+    if (previousSelectedId.current !== selectedId) {
+      instance.setView(marker.getLatLng(), Math.max(instance.getZoom(), 5));
+    }
+
+    previousSelectedId.current = selectedId;
     marker.openPopup();
   }, [selectedId, earthquakes]);
 

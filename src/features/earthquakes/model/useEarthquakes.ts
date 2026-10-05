@@ -3,6 +3,7 @@ import { loadEarthquakes } from '../api/loadEarthquakes';
 import type { Feed, EarthquakeFilters } from './types';
 
 const REQUEST_TIMEOUT_MS = 15_000;
+const REFRESH_INTERVAL_MS = 60_000;
 
 export const useEarthquakes = () => {
   const [feed, setFeed] = useState<Feed | null>(null);
@@ -24,6 +25,7 @@ export const useEarthquakes = () => {
       .then((result) => {
         if (active.current === controller) {
           setFeed(result);
+          setErrorMessage('');
         }
       })
       .catch((error: unknown) => {
@@ -61,7 +63,15 @@ export const useEarthquakes = () => {
   useEffect(() => {
     void fetchFeed();
 
+    const interval = setInterval(() => {
+      if (document.hidden || active.current) return;
+
+      void fetchFeed();
+    }, REFRESH_INTERVAL_MS);
+
     return () => {
+      clearInterval(interval);
+
       const controller = active.current;
 
       active.current = null;

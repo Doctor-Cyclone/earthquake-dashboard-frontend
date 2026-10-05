@@ -13,7 +13,7 @@ export const AppFooter = () => {
           USGS Earthquake Hazards Program
         </a>
       </span>
-      <span>Время в часовом поясе устройства · Обновление вручную</span>
+      <span>Время в часовом поясе устройства · Автообновление раз в минуту</span>
     </footer>
   );
 };
