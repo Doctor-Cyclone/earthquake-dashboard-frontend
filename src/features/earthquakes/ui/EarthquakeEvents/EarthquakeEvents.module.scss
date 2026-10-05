@@ -112,3 +112,25 @@
 .events .selected {
   background: #203b3b;
 }
+
+.scrollHint {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .events table {
+    min-width: 660px;
+  }
+
+  .eventButton {
+    min-height: 44px;
+  }
+
+  .scrollHint {
+    display: block;
+    margin: 0;
+    padding: 0 18px 14px;
+    font-size: 12px;
+    color: #9cabc0;
+  }
+}

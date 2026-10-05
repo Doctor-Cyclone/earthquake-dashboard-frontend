@@ -59,6 +59,9 @@ export const EarthquakeActivity = ({ feed, isLoading }: Props) => {
                       tabIndex={0}
                       aria-label={description}
                     >
+                      <span className={styles.mobileCount} aria-hidden="true">
+                        {bucket.count}
+                      </span>
                       <span className={styles.tooltip} aria-hidden="true">
                         {description}
                       </span>
@@ -78,6 +81,9 @@ export const EarthquakeActivity = ({ feed, isLoading }: Props) => {
             </div>
           </div>
           <p className={styles.hint}>
+            <span className={styles.mobileHint}>
+              Проведите по графику влево, чтобы увидеть остальные часы.{' '}
+            </span>
             Каждый столбец — один час. Наведите курсор или выберите столбец клавишей Tab,
             чтобы увидеть число событий.
           </p>

@@ -24,7 +24,12 @@ const EventList = ({ feed, isLoading, selectedId, onSelect }: Props) => {
     return <p className={styles.empty}>В полученной ленте нет землетрясений.</p>;
 
   return (
-    <div className={styles['table-wrap']}>
+    <div
+      className={styles['table-wrap']}
+      tabIndex={0}
+      role="region"
+      aria-label="Таблица событий, прокручивается горизонтально"
+    >
       <table>
         <thead>
           <tr>
@@ -67,6 +72,11 @@ export const EarthquakeEvents = ({ feed, isLoading, selectedId, onSelect }: Prop
           {status}
         </span>
       </div>
+      {!!feed?.earthquakes.length && (
+        <p className={styles.scrollHint}>
+          Проведите по таблице влево, чтобы увидеть глубину и время.
+        </p>
+      )}
       <EventList
         feed={feed}
         isLoading={isLoading}
