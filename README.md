@@ -1,5 +1,9 @@
 # Earthquake Dashboard — Frontend
 
+[Открыть работающий сайт](https://earthquake-dashboard-frontend.onrender.com/)
+
+![Дашборд](docs/dashboard.png)
+
 Интерфейс на React, TypeScript и Vite: карта Leaflet, сводка за сутки, список землетрясений, фильтры, автоматическое и ручное обновление и состояния загрузки/ошибок. Источник данных — отдельный бэкенд проекта, получающий ленту USGS.
 
 ## Запуск в WebStorm
@@ -71,3 +75,14 @@
 GitHub Actions запускает проверки при каждом push и pull request. Ручной запуск доступен во вкладке Actions → CI → Run workflow. Используется Node.js 24 и установка зависимостей из lock-файла через npm ci.
 
 Проверки: форматирование, линтер, тесты и production-сборка.
+
+## Публикация на Render
+
+Фронтенд: https://earthquake-dashboard-frontend.onrender.com/
+Бэкенд: https://earthquake-dashboard-backend.onrender.com/
+
+Static Site: Node.js 24, команда сборки npm ci && npm run build, каталог dist.
+Правило Rewrite: /api/* → https://earthquake-dashboard-backend.onrender.com/api/*.
+Репозиторий подключён по публичному URL; новые версии можно публиковать через Manual Deploy → Deploy latest commit в Render.
+
+Бесплатный бэкенд засыпает при отсутствии запросов. Первая загрузка после простоя может занять около минуты или больше; клиент ожидает ответ до двух минут.
