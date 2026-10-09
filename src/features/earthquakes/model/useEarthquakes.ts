@@ -2,7 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { loadEarthquakes } from '../api/loadEarthquakes';
 import type { Feed, EarthquakeFilters } from './types';
 
-const REQUEST_TIMEOUT_MS = 15_000;
+// Free hosting may need time to wake up after inactivity.
+const REQUEST_TIMEOUT_MS = 120_000;
 const REFRESH_INTERVAL_MS = 60_000;
 
 export const useEarthquakes = () => {
